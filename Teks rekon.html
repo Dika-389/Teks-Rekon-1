@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Teks Rekon – Bahasa Indonesia</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body{
+  margin:0;
+  font-family: "Segoe UI", Arial, sans-serif;
+  background:#f6c84c;
+  color:#333;
+}
+header{
+  text-align:center;
+  padding:25px 15px;
+}
+header img{
+  max-width:220px;
+}
+h1{
+  color:white;
+  margin:10px 0 5px;
+}
+.subtitle{
+  color:#fff;
+  opacity:0.9;
+}
+
+/* ===== SECTION UMUM ===== */
+section{
+  background:#f9d86c;
+  margin:18px;
+  padding:22px;
+  border-radius:18px;
+}
+.section-title{
+  font-size:22px;
+  margin-bottom:12px;
+}
+
+/* ===== HERO ===== */
+.hero{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  gap:20px;
+}
+.hero-text{
+  flex:1;
+  font-size:16px;
+  line-height:1.6;
+}
+.hero-img{
+  flex:1;
+  text-align:center;
+}
+.hero-img img{
+  max-width:160px;
+  border-radius:14px;
+}
+
+/* ===== GRID MATERI ===== */
+.grid{
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap:15px;
+}
+.card{
+  background:#ffe8a3;
+  padding:15px;
+  border-radius:14px;
+}
+.card h3{
+  margin-top:0;
+  font-size:18px;
+}
+
+/* ===== CONTOH ===== */
+.example{
+  background:#fff3c4;
+  padding:15px;
+  border-left:6px solid #ffcc4d;
+  border-radius:10px;
+  line-height:1.6;
+}
+
+/* ===== KUIS ===== */
+.timer{
+  text-align:center;
+  font-size:22px;
+  font-weight:bold;
+}
+.question{
+  font-size:18px;
+  margin:20px 0;
+}
+.options button{
+  width:100%;
+  padding:12px;
+  margin:8px 0;
+  border:none;
+  border-radius:10px;
+  font-size:16px;
+  background:#ffe8a3;
+  cursor:pointer;
+}
+.options button:hover{background:#ffdb6d}
+.options button:disabled{opacity:0.9}
+#feedback{
+  text-align:center;
+  font-weight:bold;
+  font-size:18px;
+}
+#nextBtn{
+  display:none;
+  margin:15px auto;
+  padding:10px 20px;
+  font-size:16px;
+  border:none;
+  border-radius:10px;
+  background:#ffcc4d;
+  cursor:pointer;
+}
+.center{text-align:center}
+</style>
+</head>
+
+<body>
+
+<header>
+  <img src="Bendera indo.png" alt="Bendera Indonesia">
+  <h1>Memahami Teks Rekon</h1>
+  <p class="subtitle">Bahasa Indonesia</p>
+</header>
+
+<!-- ===== PEMBUKA ===== -->
+<section class="hero">
+  <div class="hero-text">
+    <h2 class="section-title">Apa itu Teks Rekon?</h2>
+    <p>
+      Teks rekon adalah teks yang menceritakan kembali pengalaman atau
+      peristiwa yang pernah dialami seseorang secara runtut
+      berdasarkan urutan waktu.
+    </p>
+  </div>
+  <div class="hero-img">
+    <img src="Laki-laki tersenyum.jpg" alt="Siswa">
+  </div>
+</section>
+
+<!-- ===== MATERI INTI ===== -->
+<section>
+  <h2 class="section-title">Ciri, Jenis, dan Fungsi</h2>
+
+  <div class="grid">
+    <div class="card">
+      <h3>Ciri-ciri</h3>
+      <ul>
+        <li>Peristiwa masa lalu</li>
+        <li>Urutan waktu jelas</li>
+        <li>Mengandung fakta / opini</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>Jenis</h3>
+      <ul>
+        <li>Rekon faktual</li>
+        <li>Rekon pribadi</li>
+        <li>Rekon imajinatif</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>Fungsi</h3>
+      <ul>
+        <li>Menceritakan pengalaman</li>
+        <li>Memberi nilai moral</li>
+        <li>Menyampaikan informasi</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CONTOH ===== -->
+<section class="hero">
+  <div class="hero-img">
+    <img src="Perempuan belajar.jpg" alt="Siswi">
+  </div>
+  <div class="hero-text">
+    <h2 class="section-title">Contoh Teks Rekon</h2>
+    <div class="example">
+      Pada hari Minggu lalu, saya dan keluarga pergi ke Pantai Sanur.
+      Kami berangkat pagi hari untuk menikmati udara segar.
+      Sesampainya di sana, kami bermain pasir dan menikmati pemandangan laut.
+      Sore hari, kami pulang dengan perasaan senang.
+    </div>
+  </div>
+</section>
+
+<!-- ===== KUIS ===== -->
+<section>
+  <div class="timer">⏱️ Waktu: <span id="time">05:00</span></div>
+
+  <div id="quiz">
+    <div class="question" id="question"></div>
+    <div class="options" id="options"></div>
+  </div>
+
+  <p id="feedback"></p>
+  <div class="center">
+    <button id="nextBtn" onclick="nextQuestion()">Soal Berikutnya ➡️</button>
+  </div>
+</section>
+
+<script>
+// TIMER
+let timeLeft=300;
+setInterval(()=>{
+let m=Math.floor(timeLeft/60);
+let s=timeLeft%60;
+document.getElementById("time").innerText=
+String(m).padStart(2,"0")+":"+String(s).padStart(2,"0");
+if(timeLeft<=0){showResult();}
+timeLeft--;
+},1000);
+
+// SOAL
+const questions=[
+{q:"Teks rekon berisi tentang …",o:["iklan","pengalaman masa lalu","perintah","dialog"],a:1},
+{q:"Ciri utama teks rekon adalah …",o:["persuasif","kronologis","argumentatif","khayalan"],a:1},
+{q:"Rekon berdasarkan fakta disebut …",o:["pribadi","imajinatif","faktual","bebas"],a:2},
+{q:"Pendapat pribadi penulis disebut …",o:["fakta","opini","data","bukti"],a:1},
+{q:"Arti kata baku dapat dicari di …",o:["Ensiklopedia","KBBI","Atlas","Internet"],a:1}
+];
+
+let current=0,score=0;
+
+function showQuestion(){
+document.getElementById("feedback").innerText="";
+document.getElementById("nextBtn").style.display="none";
+const q=questions[current];
+document.getElementById("question").innerText=q.q;
+const opt=document.getElementById("options");
+opt.innerHTML="";
+q.o.forEach((text,i)=>{
+const btn=document.createElement("button");
+btn.innerText=String.fromCharCode(65+i)+". "+text;
+btn.onclick=()=>checkAnswer(btn,i);
+opt.appendChild(btn);
+});
+}
+function checkAnswer(btn,i){
+const buttons=document.querySelectorAll(".options button");
+buttons.forEach(b=>b.disabled=true);
+if(i===questions[current].a){
+btn.style.background="#4CAF50";
+document.getElementById("feedback").innerText="✅ Jawaban BENAR";
+score++;
+}else{
+btn.style.background="#F44336";
+document.getElementById("feedback").innerText="❌ Jawaban SALAH";
+buttons[questions[current].a].style.background="#4CAF50";
+}
+document.getElementById("nextBtn").style.display="inline-block";
+}
+function nextQuestion(){
+current++;
+if(current<questions.length){showQuestion();}
+else{showResult();}
+}
+function showResult(){
+document.getElementById("quiz").innerHTML=
+`<h2 class="center">🎉 Kuis Selesai</h2>
+<p class="center">Skor: <b>${score}/5</b></p>`;
+document.getElementById("nextBtn").style.display="none";
+}
+showQuestion();
+</script>
+
+</body>
+</html>
